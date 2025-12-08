@@ -1,0 +1,27 @@
+---
+
+# install dependencies for monitoring
+- name: Install monitoring packages
+  apt:
+    name:
+      - promtail
+      - prometheus-node-exporter
+    state: present
+
+# create monitoring directories
+
+- name: Ensure project directory exists
+  file:
+    path: /home/{{ ansible_user }}/{{ my_project }}/monitoring/promtail/
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+
+- name: Ensure project directory exists
+  file:
+    path: /home/{{ ansible_user }}/{{ my_project }}/monitoring/node_exporter/
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'

@@ -1,0 +1,52 @@
+---
+
+# Common dependencies
+
+- name: Install common packages
+  apt:
+    name:
+      - curl
+      - wget
+      - git
+      - vim
+      - htop
+      - unzip
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Upgrade all packages
+  apt:
+    upgrade: dist
+
+
+
+# Firewall
+
+- name: Ensure ufw is installed
+  apt:
+    name: ufw
+    state: present
+
+- name: Allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Enable firewall
+  ufw:
+    state: enabled
+
+
+
+# create project directory
+
+- name: Ensure project directory exists
+  file:
+    path: /home/{{ ansible_user }}/my_project
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'

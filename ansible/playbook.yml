@@ -1,0 +1,8 @@
+--- 
+- name: Init/maintain server
+  hosts: servers
+  become: yes
+  roles:
+    - common
+    - docker
+    - monitoring
