@@ -9,8 +9,12 @@
     state: present
 
 # create monitoring directories
+- name: Ensure monitoring directory exists
+  file:
+  path: /home/{{ ansible_user }}/{{ my_project }}/monitoring/
+    state: directory
 
-- name: Ensure project directory exists
+- name: Ensure promtail directory exists
   file:
     path: /home/{{ ansible_user }}/{{ my_project }}/monitoring/promtail/
     state: directory
@@ -18,7 +22,12 @@
     group: "{{ ansible_user }}"
     mode: '0755'
 
-- name: Ensure project directory exists
+# - name: Ensure positions.yml exists
+#   file:
+#     path: /home/{{ ansible_user }}/{{ my_project }}/monitoring/promtail/positions.yaml
+#     state: touch
+
+- name: Ensure node_exporter directory exists
   file:
     path: /home/{{ ansible_user }}/{{ my_project }}/monitoring/node_exporter/
     state: directory

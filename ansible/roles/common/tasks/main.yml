@@ -21,7 +21,16 @@
   apt:
     upgrade: dist
 
+# .env
 
+- name: Write .env from secret
+  copy:
+    content: "{{ env_content }}"
+    dest: /home/{{ ansible_user }}/{{ my_project }}/.env
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '600'
+    backup: yes
 
 # Firewall
 
@@ -38,8 +47,6 @@
 - name: Enable firewall
   ufw:
     state: enabled
-
-
 
 # create project directory
 

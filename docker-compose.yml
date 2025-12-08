@@ -1,0 +1,28 @@
+services:
+ promtail:
+    image: grafana/promtail:latest
+    restart: unless-stopped
+    volumes:
+      - ./promtail-config.yaml:/monitoring/promtail/promtail_config.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./monitoring/promtail/positions:/monitoring/promtail/positions
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - app_net
+    environment:
+      - GRAFANA_USERNAME=${GRAFANA_USERNAME}
+      - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+    command:
+    - -config.file=/monitoring/promtail_config.yml
+    - -config.expand-env=true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+
+networks:
+  app_net:
+    driver: bridge
+
