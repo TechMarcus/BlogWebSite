@@ -11,9 +11,9 @@
     name: docker
     state: present
 
-- name: Add current ansible user to docker group
+- name: Add current user to docker group
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ web01_user }}"
     groups: docker
     append: true
 
@@ -23,5 +23,5 @@
   copy:
     src: {{ dcompose_path }}
     dest: /home/{{ ansible_user }}/{{ my_project }}/docker-compose.yml
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ web01_user }}"
+    group: "{{ web01_user }}"

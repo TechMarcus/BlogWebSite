@@ -12,4 +12,4 @@
 - name: Ensure monitoring directory exists
   copy:
     src: {{ monitoring_dir }}
-    dest: /home/{{ ansible_user }}/{{ my_project }}/monitoring/
+    dest: /home/{{ web01_user }}/{{ my_project }}/monitoring/
