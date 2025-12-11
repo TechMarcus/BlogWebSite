@@ -16,3 +16,12 @@
     name: "{{ ansible_user }}"
     groups: docker
     append: true
+
+
+# Copy docker compose file
+- name: Copy monitoring configuration files
+  copy:
+    src: ./docker-compose.yml
+    dest: /home/{{ ansible_user }}/{{ my_project }}/docker-compose.yml
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"

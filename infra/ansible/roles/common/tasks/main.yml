@@ -52,7 +52,7 @@
 
 - name: Ensure project directory exists
   file:
-    path: /home/{{ ansible_user }}/my_project
+    path: /home/{{ ansible_user }}/{{ my_project }}
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"

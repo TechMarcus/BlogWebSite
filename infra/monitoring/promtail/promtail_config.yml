@@ -3,7 +3,7 @@ server:
   grpc_listen_port: 0
 
 positions:
-  filename: monitoring/promtail/positions.yaml
+  filename: positions.yaml
 clients:
   - url: https://logs-prod-012.grafana.net/loki/api/v1/push
     basic_auth:

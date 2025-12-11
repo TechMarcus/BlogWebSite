@@ -1,0 +1,15 @@
+---
+
+# install dependencies for monitoring
+- name: Install monitoring packages
+  apt:
+    name:
+      - promtail
+      - prometheus-node-exporter
+    state: present
+
+# create monitoring directories
+- name: Ensure monitoring directory exists
+  copy:
+    src: monitoring/
+    dest: /home/{{ ansible_user }}/{{ my_project }}/monitoring/
