@@ -1,0 +1,29 @@
+name: Project Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - test
+
+jobs:
+    ansible-run:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+
+        - name: Set up Ansible
+          uses: ansible/ansible-galaxy-action@v2
+
+        - name: Run Ansible Playbook
+          env:
+            PUBLIC_IP_WEB01: ${{ vars.PUBLIC_IP_WEB01 }}
+            ENV_CONTENT: ${{ secrets.ENV_CONTENT }}
+            ANSIBLE_USER: ${{ vars.ANSIBLE_USER }}
+          run: |
+            ansible-playbook -i inventory.ini playbook.yml \
+            -e "public_ip_web01=$PUBLIC_IP_WEB01" \
+            -e "env_content=$ENV_CONTENT" \
+            -e "ansible_user"="$ANSIBLE_USER"

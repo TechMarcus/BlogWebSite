@@ -11,5 +11,5 @@
 # create monitoring directories
 - name: Ensure monitoring directory exists
   copy:
-    src: monitoring/
+    src: {{ monitoring_dir }}
     dest: /home/{{ ansible_user }}/{{ my_project }}/monitoring/
