@@ -1,16 +1,8 @@
 ---
 
-# install dependencies for monitoring
-- name: Install monitoring packages
-  apt:
-    name:
-      - loki promtail
-      - prometheus-node-exporter
-    state: present
-    update_cache: yes
-
-# create monitoring directories
-- name: Ensure monitoring directory exists
+# Copy monitoring configuration files and create the destination directory if it doesn't exist
+- name: Copy monitoring configuration files recursively to the project directory
   copy:
-    src: "{{ monitoring_dir }}"
+    src: "{{ monitoring_dir }}/"
     dest: /home/{{ web01_user }}/{{ my_project }}/monitoring/
+    recursive: yes
