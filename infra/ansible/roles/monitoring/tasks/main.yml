@@ -4,7 +4,7 @@
 - name: Install monitoring packages
   apt:
     name:
-      - promtail
+      - loki promtail
       - prometheus-node-exporter
     state: present
     update_cache: yes
