@@ -1,0 +1,5 @@
+all:
+  hosts:
+    web01:
+      ansible_host: "{{ lookup('env', 'PUBLIC_IP_WEB01') }}"
+      ansible_user: "{{ lookup('env', 'WEB01_USER') }}"
