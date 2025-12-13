@@ -44,6 +44,7 @@ jobs:
           ENV_CONTENT: ${{ secrets.ENV_CONTENT }}
           WEB01_USER: ${{ vars.WEB01_USER }}
         run: |
+          cd infra\ansible
           ansible-playbook -i inventory.ini playbook.yml \
           -e "public_ip_web01=$PUBLIC_IP_WEB01" \
           -e "env_content=$ENV_CONTENT" \
