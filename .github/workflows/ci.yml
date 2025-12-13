@@ -45,8 +45,7 @@ jobs:
           WEB01_USER: ${{ vars.WEB01_USER }}
         working-directory: infra/ansible
         run: |
-          ansible-playbook -i inventory.ini playbook.yml \
-            -e "public_ip_web01=$PUBLIC_IP_WEB01" \
+          ansible-playbook -i inventory.yml playbook.yml \
             -e "env_content=$ENV_CONTENT" \
             -e "web01_user=$WEB01_USER"
 
