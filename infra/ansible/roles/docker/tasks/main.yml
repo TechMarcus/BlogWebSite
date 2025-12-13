@@ -19,7 +19,7 @@
 
 
 # Copy docker compose file
-- name: Copy monitoring configuration files
+- name: Copy docker compose file
   copy:
     src: "{{ dcompose_path }}"
     dest: /home/{{ ansible_user }}/{{ my_project }}/docker-compose.yml

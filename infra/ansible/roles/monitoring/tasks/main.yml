@@ -7,6 +7,7 @@
       - promtail
       - prometheus-node-exporter
     state: present
+    update_cache: yes
 
 # create monitoring directories
 - name: Ensure monitoring directory exists
