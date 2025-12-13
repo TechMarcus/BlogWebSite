@@ -1,0 +1,30 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python / Ansible
+*.pyc
+__pycache__/
+*.retry       # Ansible retry files
+*.log         # optional, if you generate logs
+
+# Vault or secret files
+*.vault       # if you use ansible-vault
+*.key
+*.pem
+*.crt
+*.env         # local .env files (should not be committed)
+
+# Docker
+**/docker-compose.override.yml
+**/docker-compose.override.*.yml
+**/Dockerfile.*.swp
+**/tmp/
+**/logs/
+**/data/
+*.tar
+*.img
+
+# monitoring
+/monitoring/promtail/positions/positions.yaml
+

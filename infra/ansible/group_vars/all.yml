@@ -1,6 +1,3 @@
 my_project: BlogWebSite
-# ansible_user: ubuntu
-# env_content: ${{ secrets.ENV_CONTENT }}
-
 monitoring_dir: infra/monitoring/
 dcompose_path: /infra/docker-compose.yml

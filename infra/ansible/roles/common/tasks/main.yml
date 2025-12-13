@@ -26,9 +26,9 @@
 - name: Write .env from secret
   copy:
     content: "{{ env_content }}"
-    dest: /home/{{ ansible_user }}/{{ my_project }}/.env
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    dest: /home/{{ web01_user }}/{{ my_project }}/.env
+    owner: "{{ web01_user }}"
+    group: "{{ web01_user }}"
     mode: '600'
     backup: yes
 

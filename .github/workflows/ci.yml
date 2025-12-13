@@ -7,6 +7,7 @@ on:
 
 jobs:
   setup-key:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Create directory and save SSH key
@@ -19,6 +20,7 @@ jobs:
           ssh-add ~/.ssh/private_key_dir/web01_key
 
   ansible-run:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: setup-key
     steps:
@@ -32,9 +34,26 @@ jobs:
         env:
           PUBLIC_IP_WEB01: ${{ vars.PUBLIC_IP_WEB01 }}
           ENV_CONTENT: ${{ secrets.ENV_CONTENT }}
-          ANSIBLE_USER: ${{ vars.ANSIBLE_USER }}
+          WEB01_USER: ${{ vars.WEB01_USER }}
         run: |
           ansible-playbook -i inventory.ini playbook.yml \
           -e "public_ip_web01=$PUBLIC_IP_WEB01" \
           -e "env_content=$ENV_CONTENT" \
-          -e "ansible_user=$ANSIBLE_USER"
+          -e "web01_user=$WEB01_USER"
+
+  
+  test-job:
+    if: github.ref == 'refs/heads/test'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+      - run: pip install ruff pytest
+
+      - run: ruff check .
+      - run: pytest
