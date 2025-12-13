@@ -1,8 +1,12 @@
 ---
 
-# Copy monitoring configuration files and create the destination directory if it doesn't exist
-- name: Copy monitoring configuration files recursively to the project directory
-  copy:
+- name: Ensure destination monitoring directory exists
+  ansible.legacy.file:
+    path: /home/{{ web01_user }}/{{ my_project }}/monitoring/
+    state: directory
+
+- name: copy monitoring configuration files
+  ansible.legacy.synchronize:
     src: "{{ monitoring_dir }}/"
     dest: /home/{{ web01_user }}/{{ my_project }}/monitoring/
-    recursive: yes
+    mode: push
