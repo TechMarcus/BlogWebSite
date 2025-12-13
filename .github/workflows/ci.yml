@@ -18,6 +18,10 @@ jobs:
           chmod 600 ~/.ssh/private_key_dir/web01_key
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/private_key_dir/web01_key
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ vars.PUBLIC_IP_WEB01 }} >> ~/.ssh/known_hosts
 
   ansible-run:
     if: github.ref == 'refs/heads/main'
