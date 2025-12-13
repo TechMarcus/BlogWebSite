@@ -1,3 +1,3 @@
 my_project: BlogWebSite
-monitoring_dir: ../monitoring
+monitoring_dir: /ansible/../monitoring
 dcompose_path: ../docker-compose.yml
