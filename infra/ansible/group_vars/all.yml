@@ -1,3 +1,3 @@
 my_project: BlogWebSite
-monitoring_dir: infra/monitoring/
-dcompose_path: /infra/docker-compose.yml
+monitoring_dir: ../monitoring/
+dcompose_path: ../docker-compose.yml
