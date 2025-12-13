@@ -21,6 +21,16 @@
   apt:
     upgrade: dist
 
+# create project directory
+
+- name: Ensure project directory exists
+  file:
+    path: /home/{{ web01_user }}/{{ my_project }}
+    state: directory
+    owner: "{{ web01_user }}"
+    group: "{{ web01_user }}"
+    mode: '0755'
+
 # .env
 
 - name: Write .env from secret
@@ -48,12 +58,4 @@
   ufw:
     state: enabled
 
-# create project directory
 
-- name: Ensure project directory exists
-  file:
-    path: /home/{{ web01_user }}/{{ my_project }}
-    state: directory
-    owner: "{{ web01_user }}"
-    group: "{{ web01_user }}"
-    mode: '0755'
