@@ -11,5 +11,5 @@
 # create monitoring directories
 - name: Ensure monitoring directory exists
   copy:
-    src: "{{ monitoring_dir }}
+    src: "{{ monitoring_dir }}"
     dest: /home/{{ web01_user }}/{{ my_project }}/monitoring/
