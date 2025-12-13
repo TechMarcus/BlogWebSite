@@ -11,6 +11,7 @@
       - vim
       - htop
       - unzip
+      - rsync
     state: present
 
 - name: Update apt cache
