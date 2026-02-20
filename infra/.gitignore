@@ -28,3 +28,4 @@ __pycache__/
 # monitoring
 /monitoring/promtail/positions/positions.yaml
 
+.env
