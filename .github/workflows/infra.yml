@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          sparse-checkout: "infra"
 
       - name: Set up SSH Agent and load key
         uses: webfactory/ssh-agent@v0.8.0
@@ -45,3 +47,7 @@ jobs:
           ansible-playbook -i inventory.yml playbook.yml \
             -e "env_content=$ENV_CONTENT" \
             -e "web01_user=$WEB01_USER"
+  
+  docker-compose-run:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest

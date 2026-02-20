@@ -1,5 +1,5 @@
 services:
- promtail:
+  promtail:
     image: grafana/promtail:latest
     restart: unless-stopped
     volumes:
@@ -19,29 +19,40 @@ services:
         max-size: "10m"
         max-file: "3"
 
-node-exporter:
-  image: prom/node-exporter:latest
-  network_mode: host
-  pid: host
-volumes:
-  - /proc:/host/proc:ro
-  - /sys:/host/sys:ro
-  - /:/rootfs:ro
-command:
-  - '--path.procfs=/host/proc'
-  - '--path.sysfs=/host/sys'
-  - '--path.rootfs=/rootfs'
 
-prometheus-agent:
-  image: prom/prometheus:latest
-  environment:
-      - GRAFANA_USERNAME=${GRAFANA_USERNAME}
-      - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+  node-exporter:
+    image: prom/node-exporter:latest
+    network_mode: host
+    pid: host
   volumes:
-    - ./monitoring_configs/prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /:/rootfs:ro
   command:
-    - '--config.file=/etc/prometheus/prometheus.yml'
+    - '--path.procfs=/host/proc'
+    - '--path.sysfs=/host/sys'
+    - '--path.rootfs=/rootfs'
 
+  prometheus-agent:
+    image: prom/prometheus:latest
+    environment:
+        - GRAFANA_USERNAME=${GRAFANA_USERNAME}
+        - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+    volumes:
+      - ./monitoring_configs/prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  backend:
+    image: ${DOCKER_NAME}/blog-backend:latest
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    networks:
+      - app_net
+    
 
 networks:
   app_net:

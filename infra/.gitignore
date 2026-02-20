@@ -13,7 +13,7 @@ __pycache__/
 *.key
 *.pem
 *.crt
-.env         # local .env files (should not be committed)
+*.env         # local .env files (should not be committed)
 
 # Docker
 **/docker-compose.override.yml
@@ -26,4 +26,6 @@ __pycache__/
 *.img
 
 # monitoring
-/monitoring/promtail/positions/positions.yaml
+/monitoring_configs/promtail/positions/positions.yaml
+
+.env
