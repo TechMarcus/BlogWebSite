@@ -5,6 +5,7 @@
 - name: Install common packages
   apt:
     name:
+      - ca-certificates
       - curl
       - wget
       - git
@@ -12,6 +13,7 @@
       - htop
       - unzip
       - rsync
+      - gnupg
     state: present
 
 - name: Update apt cache
