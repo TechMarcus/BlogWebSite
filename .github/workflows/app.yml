@@ -66,6 +66,6 @@ jobs:
       - name: Remote run
         run: |
           ssh -i ~/.ssh/id_ed25519 ${{ vars.WEB01_USER }}@${{ vars.PUBLIC_IP_WEB01 }}
-          cd /home/${{ vars.WEB01_USER }}/BlogWebSite
+          cd BlogWebSite
           echo "${{ secrets.DOCKER_PSWD }}" | docker login -u "${{ secrets.DOCKER_NAME }}" --password-stdin
           docker compose up -d
