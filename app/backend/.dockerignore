@@ -22,7 +22,6 @@ nosetests.xml
 coverage.xml
 *.cover
 *.log
-requirements.txt
 
 # Version control
 .git
