@@ -1,7 +1,7 @@
 name: Application Pipeline
 on:
   push:
-    branches: [main, test]
+    branches: [staging, test]
     paths:
       - 'app/**'
 
@@ -26,7 +26,7 @@ jobs:
         # pytest
   
   build-containers:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Docker images
         run: |
-            docker build app/backend -t ${{ secrets.DOCKER_NAME }}/blog-backend:latest
+            docker build ./app/backend -t ${{ secrets.DOCKER_NAME }}/blog-backend:latest
           # docker build app/frontend -t ${{ secrets.DOCKER_NAME }}/blog-frontend:latest
 
       - name: Push image to DockerHub
@@ -50,7 +50,7 @@ jobs:
           # docker push ${{ secrets.DOCKER_NAME }}/blog-frontend:latest
   
   deploy-containers:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     needs: build-containers
     steps:

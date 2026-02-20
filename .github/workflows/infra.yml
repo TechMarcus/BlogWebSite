@@ -1,13 +1,13 @@
 name: Infrastructure Pipeline
 on:
   push:
-    branches: [main, test]
+    branches: [staging, test]
     paths:
       - 'infra/**'
       
 jobs:
   ansible-run:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
