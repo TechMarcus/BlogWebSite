@@ -1,12 +1,12 @@
 ---
 
-- name: Install docker
+- name: Install Docker
   apt:
-    name: 
-     -docker.io
-     -docker-compose-plugin
-     - docker-ce
-     - docker-ce-cli
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
     state: present
     update_cache: yes
   
