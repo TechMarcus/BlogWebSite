@@ -48,6 +48,6 @@ jobs:
             -e "env_content=$ENV_CONTENT" \
             -e "web01_user=$WEB01_USER"
   
-  docker-compose-run:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+  # docker-compose-run:
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: ubuntu-latest
