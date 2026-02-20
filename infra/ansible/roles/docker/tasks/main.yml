@@ -3,7 +3,7 @@
 - name: Install Docker
   apt:
     name:
-      - containerd.io
+      - docker.io
       - docker-compose-plugin
     state: present
     update_cache: yes
