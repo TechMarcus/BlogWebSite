@@ -6,4 +6,4 @@ router = APIRouter(
 
 @router.get("/")
 async def read_users():
-    return [{"username": "Ricfk"}, {"username": "Morty"}]
+    return [{"username": "Ricf"}, {"username": "Morty"}]
