@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Docker images
         run: |
-            docker build -f app/backend/Dockerfile app/backend -t ${{ secrets.DOCKER_NAME }}/blog-backend:latest
+            docker build app/backend -t ${{ secrets.DOCKER_NAME }}/blog-backend:latest
           # docker build app/frontend -t ${{ secrets.DOCKER_NAME }}/blog-frontend:latest
 
       - name: Push image to DockerHub
