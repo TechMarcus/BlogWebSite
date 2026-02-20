@@ -5,10 +5,10 @@ WORKDIR /app
 RUN addgroup -S app 2>/dev/null || true && \
     adduser -S app -G app 2>/dev/null || true
 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY --chown=app:app . .
-
-RUN pip install --no-cache-dir -r requirements.txt
 
 USER app
 
