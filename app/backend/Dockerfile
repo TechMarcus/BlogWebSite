@@ -2,7 +2,8 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-RUN addgroup -S app && adduser -S app -G app
+RUN addgroup -S app 2>/dev/null || true && \
+    adduser -S app -G app 2>/dev/null || true
 
 
 COPY --chown=app:app . .
