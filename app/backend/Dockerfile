@@ -4,10 +4,10 @@ WORKDIR /app
 
 RUN addgroup -S app && adduser -S app -G app
 
-COPY --chown=app:app app/backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=app:app app/backend/. .
+COPY --chown=app:app . .
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 USER app
 
