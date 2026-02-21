@@ -2,8 +2,8 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-RUN addgroup -S app 2>/dev/null || true && \
-    adduser -S app -G app 2>/dev/null || true
+RUN groupadd --system app && \
+    useradd --system --gid app --no-create-home app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
