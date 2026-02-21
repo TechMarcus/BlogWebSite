@@ -2,17 +2,19 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-RUN groupadd --system app && \
-    useradd --system --gid app --no-create-home app
+EXPOSE 8000
+
+# RUN groupadd --system app && \
+#     useradd --system --gid app --no-create-home app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=app:app . .
+# COPY --chown=app:app . .
 
-USER app
+COPY . .
 
-EXPOSE 8000
+# USER app
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
