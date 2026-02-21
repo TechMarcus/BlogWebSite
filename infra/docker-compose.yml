@@ -44,7 +44,7 @@ services:
   #     - '--config.file=/etc/prometheus/prometheus.yml'
 
   backend:
-    image: ${DOCKER_NAME}/blog-backend:latest
+    image: marcus1939/blog-backend:latest
     restart: unless-stopped
     ports:
       - "8000:8000"
