@@ -68,14 +68,7 @@ jobs:
           ssh -i ~/.ssh/id_ed25519 ${{ vars.WEB01_USER }}@${{ vars.PUBLIC_IP_WEB01 }} << 'EOF'
             cd BlogWebSite/
             echo "${{ secrets.DOCKER_PSWD }}" | docker login -u "${{ secrets.DOCKER_NAME }}" --password-stdin
-            for IMAGE in "${{ secrets.DOCKER_NAME }}"/blog-backend; do
-              CONTAINERS=$(docker ps -a --filter ancestor=$IMAGE -q)
-              if [ -n "$CONTAINERS" ]; then
-                docker stop $CONTAINERS
-                docker rm $CONTAINERS
-              fi
-              docker compose up -d
-            done
+            docker compose up --pull always -d --remove-orphans
           EOF
         #   echo "$ENV_CONTENT"
         #   env $(echo "$ENV_CONTENT" | xargs) docker compose up -d
