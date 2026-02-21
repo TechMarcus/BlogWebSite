@@ -50,8 +50,8 @@ services:
       - "8000:8000"
     # environment:
     #   - DOCKER_NAME
-    networks:
-      - app_net
+    # networks:
+    #   - app_net
     
 
 networks:
