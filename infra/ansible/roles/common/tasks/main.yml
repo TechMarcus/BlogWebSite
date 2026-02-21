@@ -46,6 +46,12 @@
     rule: allow
     name: OpenSSH
 
+- name: Allow app port 8000
+  ufw:
+    rule: allow
+    port: "8000"
+    proto: tcp
+
 - name: Enable firewall
   ufw:
     state: enabled
