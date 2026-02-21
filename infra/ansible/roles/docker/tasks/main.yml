@@ -1,15 +1,3 @@
----
-
-- name: Add Docker GPG key
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-
-- name: Add Docker repository
-  apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-    state: present
-
 - name: Install Docker
   apt:
     name:
@@ -19,7 +7,13 @@
       - docker-compose-plugin
     update_cache: yes
     state: present
-  
+
+- name: Start and enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
 - name: Ensure docker group exists
   group:
     name: docker
@@ -31,8 +25,9 @@
     groups: docker
     append: true
 
+- name: Reset connection to apply group membership
+  meta: reset_connection
 
-# Copy docker compose file
 - name: Copy docker compose file
   copy:
     src: "{{ dcompose_path }}"
