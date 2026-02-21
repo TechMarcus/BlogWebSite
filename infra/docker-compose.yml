@@ -45,7 +45,6 @@ services:
 
   backend:
     image: marcus1939/blog-backend:latest
-    user: app
     restart: unless-stopped
     ports:
       - "8000:8000"
