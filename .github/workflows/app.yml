@@ -66,11 +66,11 @@ jobs:
       - name: Remote run
         run: |
           ssh -i ~/.ssh/id_ed25519 ${{ vars.WEB01_USER }}@${{ vars.PUBLIC_IP_WEB01 }} << 'EOF'
+            echo "$ENV_CONTENT"
             cd BlogWebSite/
             echo "${{ secrets.DOCKER_PSWD }}" | docker login -u "${{ secrets.DOCKER_NAME }}" --password-stdin
             docker compose up --pull always -d --remove-orphans
           EOF
-        #   echo "$ENV_CONTENT"
         #   env $(echo "$ENV_CONTENT" | xargs) docker compose up -d
-        # env:
-        #   ENV_CONTENT: ${{ secrets.ENV_CONTENT }}
+        env:
+          ENV_CONTENT: ${{ secrets.ENV_CONTENT }}
