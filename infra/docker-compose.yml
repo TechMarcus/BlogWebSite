@@ -24,11 +24,11 @@ services:
     image: prom/node-exporter:latest
     network_mode: host
     pid: host
-  volumes:
+    volumes:
     - /proc:/host/proc:ro
     - /sys:/host/sys:ro
     - /:/rootfs:ro
-  command:
+    command:
     - '--path.procfs=/host/proc'
     - '--path.sysfs=/host/sys'
     - '--path.rootfs=/rootfs'
