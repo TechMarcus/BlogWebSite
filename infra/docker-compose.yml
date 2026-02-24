@@ -2,6 +2,8 @@ services:
   promtail:
     image: grafana/promtail:latest
     restart: unless-stopped
+    profiles:
+    - monitoring
     volumes:
       - ./promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
@@ -21,6 +23,8 @@ services:
   node-exporter:
     restart: unless-stopped
     image: prom/node-exporter:latest
+    profiles:
+    - monitoring
     network_mode: host
     pid: host
     volumes:
@@ -37,6 +41,8 @@ services:
   prometheus-agent:
     image: prom/prometheus:latest
     restart: unless-stopped
+    profiles:
+    - monitoring
     env_file:
       - .env
     volumes:
@@ -48,6 +54,8 @@ services:
   backend:
     image: ${DOCKER_NAME}/blog-backend:latest
     restart: unless-stopped
+    profiles:
+    - app
     ports:
       - "8000:8000"
     env_file:
