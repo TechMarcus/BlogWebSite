@@ -3,9 +3,9 @@ services:
     image: grafana/promtail:latest
     restart: unless-stopped
     volumes:
-      - ./infra/monitoring_configs/promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
+      - ./monitoring_configs/promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./infra/monitoring_configs/promtail/positions:/monitoring/promtail/positions
+      - ./monitoring_configs/promtail/positions:/monitoring/promtail/positions
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
       - .env

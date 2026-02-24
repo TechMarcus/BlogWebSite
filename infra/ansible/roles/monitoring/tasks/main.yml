@@ -1,12 +1,12 @@
 ---
 
-- name: Ensure destination monitoring directory exists
-  ansible.legacy.file:
-    path: /home/{{ web01_user }}/{{ my_project }}/monitoring/
-    state: directory
+# - name: Ensure destination monitoring directory exists
+#   ansible.legacy.file:
+#     path: /home/{{ web01_user }}/{{ my_project }}
+#     state: directory
 
 - name: copy monitoring configuration files
   ansible.legacy.synchronize:
     src: "{{ monitoring_dir }}/"
-    dest: /home/{{ web01_user }}/{{ my_project }}/monitoring/
+    dest: /home/{{ web01_user }}/{{ my_project }}
     mode: push
