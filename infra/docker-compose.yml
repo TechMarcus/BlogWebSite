@@ -18,7 +18,6 @@ services:
         max-size: "10m"
         max-file: "3"
 
-
   node-exporter:
     restart: unless-stopped
     image: prom/node-exporter:latest
@@ -45,7 +44,6 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--log.level=warn'
 
-
   backend:
     image: ${DOCKER_NAME}/blog-backend:latest
     restart: unless-stopped
@@ -61,3 +59,5 @@ networks:
   app_net:
     driver: bridge
 
+volumes:
+  promtail-positions:
