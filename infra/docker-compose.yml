@@ -42,6 +42,7 @@ services:
       - ./prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--log.level=warn'
 
 
   backend:
