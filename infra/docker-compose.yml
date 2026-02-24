@@ -3,9 +3,9 @@ services:
     image: grafana/promtail:latest
     restart: unless-stopped
     volumes:
-      - ./monitoring_configs/promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
+      - ./promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./monitoring_configs/promtail/positions:/monitoring/promtail/positions
+      - ./promtail/positions:/monitoring/promtail/positions
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
       - .env
@@ -39,7 +39,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./monitoring_configs/prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
 
