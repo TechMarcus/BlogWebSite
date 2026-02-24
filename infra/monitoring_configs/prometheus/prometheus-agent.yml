@@ -1,5 +1,6 @@
 global:
-  scrape_interval: 15s 
+  scrape_interval: 15s
+  log_level: warn
   
 scrape_configs:
   - job_name: 'node_exporter'    
