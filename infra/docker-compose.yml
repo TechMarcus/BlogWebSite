@@ -5,7 +5,7 @@ services:
     volumes:
       - ./promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./promtail/positions:/monitoring/promtail/positions
+      - promtail-positions:/monitoring/promtail/positions
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
       - .env
