@@ -44,8 +44,8 @@ jobs:
           WEB01_USER: ${{ vars.WEB01_USER }}
         working-directory: infra/ansible
         run: |
-          echo "$ENV_CONTENT" > /temp_env.txt
+          echo "$ENV_CONTENT" > /tmp/temp_env.txt
           ansible-playbook -i inventory.yml playbook.yml \
-            -e "env_content=/temp_env.txt" \
+            -e "env_content=/tmp/temp_env.txt" \
             -e "web01_user=$WEB01_USER"
   
