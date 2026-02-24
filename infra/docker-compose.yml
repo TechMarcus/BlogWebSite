@@ -32,6 +32,7 @@ services:
     - '--path.procfs=/host/proc'
     - '--path.sysfs=/host/sys'
     - '--path.rootfs=/rootfs'
+    - '--log.level=warn'
 
   prometheus-agent:
     image: prom/prometheus:latest
