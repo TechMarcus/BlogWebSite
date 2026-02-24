@@ -1,50 +1,50 @@
 services:
-  # promtail:
-  #   image: grafana/promtail:latest
-  #   restart: unless-stopped
-  #   volumes:
-  #     - ./infra/monitoring_configs/promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
-  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
-  #     - ./infra/monitoring_configs/promtail/positions:/monitoring/promtail/positions
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #   environment:
-  #     - GRAFANA_USERNAME=${GRAFANA_USERNAME}
-  #     - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
-  #   command:
-  #   - -config.file=/etc/promtail/promtail.yml
-  #   - -config.expand-env=true
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "10m"
-  #       max-file: "3"
+  promtail:
+    image: grafana/promtail:latest
+    restart: unless-stopped
+    volumes:
+      - ./infra/monitoring_configs/promtail/promtail_config.yml:/etc/promtail/promtail.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./infra/monitoring_configs/promtail/positions:/monitoring/promtail/positions
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - GRAFANA_USERNAME=${GRAFANA_USERNAME}
+      - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+    command:
+    - -config.file=/etc/promtail/promtail.yml
+    - -config.expand-env=true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 
-  # node-exporter:
-  #   image: prom/node-exporter:latest
-  #   network_mode: host
-  #   pid: host
-  # volumes:
-  #   - /proc:/host/proc:ro
-  #   - /sys:/host/sys:ro
-  #   - /:/rootfs:ro
-  # command:
-  #   - '--path.procfs=/host/proc'
-  #   - '--path.sysfs=/host/sys'
-  #   - '--path.rootfs=/rootfs'
+  node-exporter:
+    image: prom/node-exporter:latest
+    network_mode: host
+    pid: host
+  volumes:
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /:/rootfs:ro
+  command:
+    - '--path.procfs=/host/proc'
+    - '--path.sysfs=/host/sys'
+    - '--path.rootfs=/rootfs'
 
-  # prometheus-agent:
-  #   image: prom/prometheus:latest
-  #   environment:
-  #       - GRAFANA_USERNAME=${GRAFANA_USERNAME}
-  #       - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
-  #   volumes:
-  #     - ./monitoring_configs/prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
-  #   command:
-  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  prometheus-agent:
+    image: prom/prometheus:latest
+    environment:
+        - GRAFANA_USERNAME=${GRAFANA_USERNAME}
+        - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+    volumes:
+      - ./monitoring_configs/prometheus/prometheus-agent.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
 
   backend:
-    image: marcus1939/blog-backend:latest
+    image: ${DOCKER_NAME}/blog-backend:latest
     restart: unless-stopped
     ports:
       - "8000:8000"
