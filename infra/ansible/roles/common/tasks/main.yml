@@ -38,7 +38,7 @@
 
 - name: Write .env from secret
   copy:
-    content: "{{ lookup('file', env_content_file) }}"
+    content: "{{ lookup('file', env_content) }}"
     dest: /home/{{ web01_user }}/{{ my_project }}/.env
     owner: "{{ web01_user }}"
     group: "{{ web01_user }}"
