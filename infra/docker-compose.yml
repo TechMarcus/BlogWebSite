@@ -7,9 +7,11 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - ./infra/monitoring_configs/promtail/positions:/monitoring/promtail/positions
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      - GRAFANA_USERNAME=${GRAFANA_USERNAME}
-      - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+    # environment:
+    #   - GRAFANA_USERNAME=${GRAFANA_USERNAME}
+    #   - GRAFANA_API_TOKEN=${GRAFANA_API_TOKEN} 
+    env_file:
+      - .env
     command:
     - -config.file=/etc/promtail/promtail.yml
     - -config.expand-env=true
