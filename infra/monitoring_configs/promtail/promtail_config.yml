@@ -8,8 +8,8 @@ positions:
 clients:
   - url: https://logs-prod-012.grafana.net/loki/api/v1/push
     basic_auth:
-      username: ${GRAFANA_USERNAME}
-      password: ${GRAFANA_API_TOKEN} 
+      username: ${LOKI_USERNAME}
+      password: ${LOKI_API_TOKEN} 
 
 scrape_configs:
   - job_name: docker
