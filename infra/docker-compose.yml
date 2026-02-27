@@ -12,7 +12,7 @@ services:
     env_file:
       - .env
     command:
-    - -config.file=/etc/promtail/promtail.yml -config.expand-env=true
+    - -config.file=/etc/promtail/promtail.yml
     logging:
       driver: "json-file"
       options:
