@@ -45,8 +45,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./prometheus.template.yml:/etc/prometheus/prometheus.template.yml
-      - ./entrypoint.sh:/entrypoint.sh
+      - ./prometheus/prometheus.template.yml:/etc/prometheus/prometheus.template.yml
+      - ./prometheus/entrypoint.sh:/entrypoint.sh
     entrypoint: ["/bin/sh", "/entrypoint.sh"]
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
