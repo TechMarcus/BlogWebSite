@@ -44,6 +44,8 @@ services:
     - monitoring
     env_file:
       - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./prometheus/prometheus.template.yml:/etc/prometheus/prometheus.template.yml
       - ./prometheus/entrypoint.sh:/entrypoint.sh
@@ -51,7 +53,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--log.level=warn'
-      - '--enable-feature=agent'
+      - '--agent'
 
   backend:
     image: ${DOCKER_NAME}/blog-backend:latest
