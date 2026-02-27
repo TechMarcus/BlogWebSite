@@ -13,7 +13,6 @@ services:
       - .env
     command:
     - -config.file=/etc/promtail/promtail.yml -config.expand-env=true
-    - -config.expand-env=true
     logging:
       driver: "json-file"
       options:
@@ -52,6 +51,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--log.level=warn'
+      - '--enable-feature=agent'
 
   backend:
     image: ${DOCKER_NAME}/blog-backend:latest
