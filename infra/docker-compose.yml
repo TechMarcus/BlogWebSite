@@ -25,7 +25,8 @@ services:
     image: prom/node-exporter:latest
     profiles:
     - monitoring
-    network_mode: host
+    networks:
+      - monitoring_net
     pid: host
     volumes:
     - /proc:/host/proc:ro
@@ -38,6 +39,16 @@ services:
     - '--path.rootfs=/rootfs'
     - '--log.level=warn'
 
+cadvisor:
+  image: gcr.io/cadvisor/cadvisor
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:ro
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+  networks:
+    - monitoring_net
+
   prometheus-agent:
     image: prom/prometheus:latest
     restart: unless-stopped
@@ -45,8 +56,8 @@ services:
     - monitoring
     env_file:
       - .env
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    networks:
+      - monitoring_net
     volumes:
       - ./prometheus/prometheus.template.yml:/etc/prometheus/prometheus.template.yml
       - ./prometheus/entrypoint.sh:/entrypoint.sh
@@ -70,7 +81,7 @@ services:
     
 
 networks:
-  app_net:
+  monitoring_net:
     driver: bridge
 
 volumes:
