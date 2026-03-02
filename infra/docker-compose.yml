@@ -1,7 +1,6 @@
 services:
   promtail:
     image: grafana/promtail:latest
-    restart: unless-stopped
     profiles:
     - monitoring
     volumes:
@@ -21,7 +20,6 @@ services:
         max-file: "3"
 
   node-exporter:
-    restart: unless-stopped
     image: prom/node-exporter:latest
     profiles:
     - monitoring
@@ -41,6 +39,8 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor
+    profiles:
+    - monitoring
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -51,7 +51,6 @@ services:
 
   prometheus-agent:
     image: prom/prometheus:latest
-    restart: unless-stopped
     profiles:
     - monitoring
     env_file:
