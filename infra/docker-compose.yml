@@ -37,21 +37,21 @@ services:
     - '--path.rootfs=/rootfs'
     - '--log.level=warn'
 
-  # cadvisor:
-  #   image: gcr.io/cadvisor/cadvisor
-  #   profiles:
-  #   - monitoring
-  #   volumes:
-  #     - /:/rootfs:ro
-  #     - /var/run:/var/run:ro
-  #     - /sys:/sys:ro
-  #     - /var/lib/docker/:/var/lib/docker:ro
-  #   devices:
-  #   - /dev/kmsg:/dev/kmsg
-  #   command:
-  #   - '--v=0'
-  #   networks:
-  #     - monitoring_net
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    profiles:
+    - monitoring
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    devices:
+    - /dev/kmsg:/dev/kmsg
+    command:
+    - '--v=0'
+    networks:
+      - monitoring_net
 
   prometheus-agent:
     image: prom/prometheus:latest
