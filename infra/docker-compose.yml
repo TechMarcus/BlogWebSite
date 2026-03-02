@@ -49,7 +49,7 @@ services:
     devices:
     - /dev/kmsg:/dev/kmsg
     command:
-    - '--log-level=warn'
+    - '--v=0'
     networks:
       - monitoring_net
 
