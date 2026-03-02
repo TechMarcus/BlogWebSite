@@ -46,6 +46,10 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
+    devices:
+    - /dev/kmsg:/dev/kmsg
+    command:
+    - '--log-level=warn'
     networks:
       - monitoring_net
 
