@@ -15,3 +15,9 @@ remote_write:
     basic_auth:
       username: ${PROMETHEUS_USERNAME}
       password: ${PROMETHEUS_API_TOKEN}
+    queue_config:
+      max_samples_per_send: 2000  
+      batch_send_deadline: 10s        
+      max_shards: 4            
+      min_shards: 1
+      capacity: 10000
